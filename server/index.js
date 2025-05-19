@@ -231,7 +231,9 @@ const outfits = {
 
 // Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://your-frontend-domain.vercel.app', 'http://localhost:3000']
+    : 'http://localhost:3000',
   methods: ['GET', 'POST'],
   credentials: true
 }));
@@ -318,7 +320,15 @@ app.post('/api/ai-recommendation', async (req, res) => {
   }
 });
 
+// Add a health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-}); 
+});
+
+// Export the Express API
+module.exports = app; 

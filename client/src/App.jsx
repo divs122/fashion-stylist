@@ -31,11 +31,13 @@ const Form = () => {
     setError('');
 
     try {
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      
       // Get AI recommendation
-      const aiResponse = await axios.post('http://localhost:5000/api/ai-recommendation', formData);
+      const aiResponse = await axios.post(`${API_URL}/api/ai-recommendation`, formData);
       
       // Get regular recommendations
-      const recommendationsResponse = await axios.post('http://localhost:5000/api/recommendations', formData);
+      const recommendationsResponse = await axios.post(`${API_URL}/api/recommendations`, formData);
       
       if (!recommendationsResponse.data || recommendationsResponse.data.length === 0) {
         throw new Error('No outfits found for your preferences. Try different style options.');

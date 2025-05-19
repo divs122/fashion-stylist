@@ -8,231 +8,226 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Enhanced outfit database with more options and shopping platforms
-const outfits = [
-  {
-    id: 1,
-    title: 'Casual Summer Outfit',
-    image: 'https://example.com/casual-summer.jpg',
-    description: 'A light and comfortable outfit perfect for summer days.',
-    colorScheme: 'Blue and White',
-    items: [
-      {
-        type: 'Top',
-        name: 'Light Blue Cotton T-Shirt',
-        description: 'Breathable cotton t-shirt with a relaxed fit',
-        price: '$29.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/casual-tshirt',
-          hnm: 'https://www2.hm.com/casual-tshirt',
-          zara: 'https://www.zara.com/casual-tshirt',
-          myntra: 'https://www.myntra.com/casual-tshirt',
-          asos: 'https://www.asos.com/casual-tshirt',
-          uniqlo: 'https://www.uniqlo.com/casual-tshirt'
+const outfits = {
+  casual: [
+    {
+      id: 1,
+      title: "Casual Summer Day",
+      description: "A comfortable and stylish casual outfit perfect for summer days",
+      colorScheme: "Light Blue, White, and Denim",
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=60",
+      items: [
+        {
+          type: "Top",
+          name: "Light Blue T-Shirt",
+          description: "Comfortable cotton t-shirt in light blue",
+          price: "$25",
+          shoppingLinks: {
+            "Amazon": "https://www.amazon.com",
+            "H&M": "https://www.hm.com",
+            "Zara": "https://www.zara.com"
+          }
+        },
+        {
+          type: "Bottom",
+          name: "Blue Denim Jeans",
+          description: "Classic blue denim jeans",
+          price: "$45",
+          shoppingLinks: {
+            "Levi's": "https://www.levi.com",
+            "Gap": "https://www.gap.com",
+            "Uniqlo": "https://www.uniqlo.com"
+          }
+        },
+        {
+          type: "Shoes",
+          name: "White Sneakers",
+          description: "Clean white sneakers",
+          price: "$60",
+          shoppingLinks: {
+            "Nike": "https://www.nike.com",
+            "Adidas": "https://www.adidas.com",
+            "Puma": "https://www.puma.com"
+          }
         }
-      },
-      {
-        type: 'Bottom',
-        name: 'White Denim Shorts',
-        description: 'Classic white denim shorts with a comfortable fit',
-        price: '$39.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/white-shorts',
-          hnm: 'https://www2.hm.com/white-shorts',
-          zara: 'https://www.zara.com/white-shorts',
-          myntra: 'https://www.myntra.com/white-shorts',
-          asos: 'https://www.asos.com/white-shorts',
-          uniqlo: 'https://www.uniqlo.com/white-shorts'
+      ]
+    },
+    {
+      id: 2,
+      title: "Street Style Casual",
+      description: "Modern street style outfit with urban vibes",
+      colorScheme: "Black, White, and Gray",
+      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&auto=format&fit=crop&q=60",
+      items: [
+        {
+          type: "Top",
+          name: "Graphic T-Shirt",
+          description: "Urban graphic print t-shirt",
+          price: "$30",
+          shoppingLinks: {
+            "Urban Outfitters": "https://www.urbanoutfitters.com",
+            "ASOS": "https://www.asos.com",
+            "Zara": "https://www.zara.com"
+          }
+        },
+        {
+          type: "Bottom",
+          name: "Black Cargo Pants",
+          description: "Stylish cargo pants with multiple pockets",
+          price: "$55",
+          shoppingLinks: {
+            "H&M": "https://www.hm.com",
+            "Zara": "https://www.zara.com",
+            "Uniqlo": "https://www.uniqlo.com"
+          }
+        },
+        {
+          type: "Shoes",
+          name: "Black Sneakers",
+          description: "Comfortable black sneakers",
+          price: "$70",
+          shoppingLinks: {
+            "Nike": "https://www.nike.com",
+            "Adidas": "https://www.adidas.com",
+            "Puma": "https://www.puma.com"
+          }
         }
-      },
-      {
-        type: 'Shoes',
-        name: 'White Canvas Sneakers',
-        description: 'Classic white sneakers for everyday wear',
-        price: '$49.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/white-sneakers',
-          hnm: 'https://www2.hm.com/white-sneakers',
-          zara: 'https://www.zara.com/white-sneakers',
-          myntra: 'https://www.myntra.com/white-sneakers',
-          asos: 'https://www.asos.com/white-sneakers',
-          uniqlo: 'https://www.uniqlo.com/white-sneakers'
+      ]
+    }
+  ],
+  formal: [
+    {
+      id: 3,
+      title: "Business Professional",
+      description: "Classic business professional outfit",
+      colorScheme: "Navy Blue, White, and Black",
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&auto=format&fit=crop&q=60",
+      items: [
+        {
+          type: "Top",
+          name: "White Dress Shirt",
+          description: "Crisp white formal shirt",
+          price: "$45",
+          shoppingLinks: {
+            "Charles Tyrwhitt": "https://www.ctshirts.com",
+            "Hugo Boss": "https://www.hugoboss.com",
+            "Brooks Brothers": "https://www.brooksbrothers.com"
+          }
+        },
+        {
+          type: "Bottom",
+          name: "Navy Blue Suit Pants",
+          description: "Tailored navy blue suit pants",
+          price: "$120",
+          shoppingLinks: {
+            "Hugo Boss": "https://www.hugoboss.com",
+            "Brooks Brothers": "https://www.brooksbrothers.com",
+            "Ralph Lauren": "https://www.ralphlauren.com"
+          }
+        },
+        {
+          type: "Shoes",
+          name: "Black Oxford Shoes",
+          description: "Classic black leather oxford shoes",
+          price: "$150",
+          shoppingLinks: {
+            "Allen Edmonds": "https://www.allenedmonds.com",
+            "Cole Haan": "https://www.colehaan.com",
+            "Johnston & Murphy": "https://www.johnstonmurphy.com"
+          }
         }
-      },
-      {
-        type: 'Accessories',
-        name: 'Silver Chain Necklace',
-        description: 'Minimalist silver chain necklace',
-        price: '$19.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/silver-necklace',
-          hnm: 'https://www2.hm.com/silver-necklace',
-          zara: 'https://www.zara.com/silver-necklace'
+      ]
+    }
+  ],
+  streetwear: [
+    {
+      id: 4,
+      title: "Urban Street Style",
+      description: "Modern streetwear outfit with urban aesthetics",
+      colorScheme: "Black, Red, and White",
+      image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=800&auto=format&fit=crop&q=60",
+      items: [
+        {
+          type: "Top",
+          name: "Oversized Hoodie",
+          description: "Comfortable oversized hoodie",
+          price: "$65",
+          shoppingLinks: {
+            "Supreme": "https://www.supremenewyork.com",
+            "Palace": "https://www.palaceskateboards.com",
+            "Nike": "https://www.nike.com"
+          }
+        },
+        {
+          type: "Bottom",
+          name: "Cargo Joggers",
+          description: "Stylish cargo joggers",
+          price: "$55",
+          shoppingLinks: {
+            "Nike": "https://www.nike.com",
+            "Adidas": "https://www.adidas.com",
+            "Puma": "https://www.puma.com"
+          }
+        },
+        {
+          type: "Shoes",
+          name: "Limited Edition Sneakers",
+          description: "Exclusive limited edition sneakers",
+          price: "$200",
+          shoppingLinks: {
+            "Nike": "https://www.nike.com",
+            "Adidas": "https://www.adidas.com",
+            "StockX": "https://www.stockx.com"
+          }
         }
-      }
-    ],
-    bodyType: ['pear', 'rectangle'],
-    skinTone: ['fair', 'medium'],
-    style: 'casual',
-    gender: 'female',
-    budget: 'low',
-    season: 'summer',
-    occasion: 'college'
-  },
-  {
-    id: 2,
-    title: 'Formal Winter Outfit',
-    image: 'https://example.com/formal-winter.jpg',
-    description: 'A sophisticated outfit perfect for formal occasions.',
-    colorScheme: 'Black and Grey',
-    items: [
-      {
-        type: 'Top',
-        name: 'Black Silk Blouse',
-        description: 'Elegant silk blouse with a modern cut',
-        price: '$89.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/silk-blouse',
-          hnm: 'https://www2.hm.com/silk-blouse',
-          zara: 'https://www.zara.com/silk-blouse',
-          myntra: 'https://www.myntra.com/silk-blouse',
-          asos: 'https://www.asos.com/silk-blouse',
-          uniqlo: 'https://www.uniqlo.com/silk-blouse'
+      ]
+    }
+  ],
+  boho: [
+    {
+      id: 5,
+      title: "Bohemian Dream",
+      description: "Free-spirited bohemian style outfit",
+      colorScheme: "Earth Tones, Cream, and Brown",
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop&q=60",
+      items: [
+        {
+          type: "Top",
+          name: "Embroidered Blouse",
+          description: "Flowy embroidered blouse",
+          price: "$45",
+          shoppingLinks: {
+            "Free People": "https://www.freepeople.com",
+            "Urban Outfitters": "https://www.urbanoutfitters.com",
+            "Anthropologie": "https://www.anthropologie.com"
+          }
+        },
+        {
+          type: "Bottom",
+          name: "Maxi Skirt",
+          description: "Flowy maxi skirt with ethnic print",
+          price: "$60",
+          shoppingLinks: {
+            "Free People": "https://www.freepeople.com",
+            "Urban Outfitters": "https://www.urbanoutfitters.com",
+            "Anthropologie": "https://www.anthropologie.com"
+          }
+        },
+        {
+          type: "Shoes",
+          name: "Leather Sandals",
+          description: "Handcrafted leather sandals",
+          price: "$80",
+          shoppingLinks: {
+            "Free People": "https://www.freepeople.com",
+            "Urban Outfitters": "https://www.urbanoutfitters.com",
+            "Anthropologie": "https://www.anthropologie.com"
+          }
         }
-      },
-      {
-        type: 'Bottom',
-        name: 'Grey Wool Trousers',
-        description: 'Tailored wool trousers for a professional look',
-        price: '$129.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/wool-trousers',
-          hnm: 'https://www2.hm.com/wool-trousers',
-          zara: 'https://www.zara.com/wool-trousers',
-          myntra: 'https://www.myntra.com/wool-trousers',
-          asos: 'https://www.asos.com/wool-trousers',
-          uniqlo: 'https://www.uniqlo.com/wool-trousers'
-        }
-      },
-      {
-        type: 'Shoes',
-        name: 'Black Leather Heels',
-        description: 'Classic black leather heels for formal occasions',
-        price: '$79.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/leather-heels',
-          hnm: 'https://www2.hm.com/leather-heels',
-          zara: 'https://www.zara.com/leather-heels'
-        }
-      },
-      {
-        type: 'Accessories',
-        name: 'Gold Hoop Earrings',
-        description: 'Elegant gold hoop earrings',
-        price: '$29.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/gold-hoops',
-          hnm: 'https://www2.hm.com/gold-hoops',
-          zara: 'https://www.zara.com/gold-hoops'
-        }
-      }
-    ],
-    bodyType: ['hourglass', 'apple'],
-    skinTone: ['medium', 'dark'],
-    style: 'formal',
-    gender: 'female',
-    budget: 'high',
-    season: 'winter',
-    occasion: 'office'
-  },
-  {
-    id: 3,
-    title: 'Streetwear Urban Look',
-    image: 'https://example.com/streetwear.jpg',
-    description: 'Modern streetwear outfit with urban vibes.',
-    colorScheme: 'Black and Red',
-    items: [
-      {
-        type: 'Top',
-        name: 'Oversized Graphic T-Shirt',
-        description: 'Urban graphic t-shirt with bold design',
-        price: '$45.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/graphic-tshirt',
-          hnm: 'https://www2.hm.com/graphic-tshirt',
-          zara: 'https://www.zara.com/graphic-tshirt',
-          myntra: 'https://www.myntra.com/graphic-tshirt',
-          asos: 'https://www.asos.com/graphic-tshirt',
-          uniqlo: 'https://www.uniqlo.com/graphic-tshirt'
-        }
-      },
-      {
-        type: 'Bottom',
-        name: 'Cargo Pants',
-        description: 'Urban cargo pants with multiple pockets',
-        price: '$59.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/cargo-pants',
-          hnm: 'https://www2.hm.com/cargo-pants',
-          zara: 'https://www.zara.com/cargo-pants',
-          myntra: 'https://www.myntra.com/cargo-pants',
-          asos: 'https://www.asos.com/cargo-pants',
-          uniqlo: 'https://www.uniqlo.com/cargo-pants'
-        }
-      }
-    ],
-    bodyType: ['rectangle', 'pear'],
-    skinTone: ['fair', 'medium', 'dark'],
-    style: 'streetwear',
-    gender: 'male',
-    budget: 'medium',
-    season: 'fall',
-    occasion: 'college'
-  },
-  {
-    id: 4,
-    title: 'Boho Summer Festival',
-    image: 'https://example.com/boho-summer.jpg',
-    description: 'Free-spirited boho outfit perfect for festivals.',
-    colorScheme: 'Earth Tones',
-    items: [
-      {
-        type: 'Top',
-        name: 'Crochet Crop Top',
-        description: 'Handmade crochet top with boho pattern',
-        price: '$35.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/crochet-top',
-          hnm: 'https://www2.hm.com/crochet-top',
-          zara: 'https://www.zara.com/crochet-top',
-          myntra: 'https://www.myntra.com/crochet-top',
-          asos: 'https://www.asos.com/crochet-top',
-          uniqlo: 'https://www.uniqlo.com/crochet-top'
-        }
-      },
-      {
-        type: 'Bottom',
-        name: 'Maxi Skirt',
-        description: 'Flowing maxi skirt with ethnic print',
-        price: '$49.99',
-        shoppingLinks: {
-          amazon: 'https://amazon.com/maxi-skirt',
-          hnm: 'https://www2.hm.com/maxi-skirt',
-          zara: 'https://www.zara.com/maxi-skirt',
-          myntra: 'https://www.myntra.com/maxi-skirt',
-          asos: 'https://www.asos.com/maxi-skirt',
-          uniqlo: 'https://www.uniqlo.com/maxi-skirt'
-        }
-      }
-    ],
-    bodyType: ['hourglass', 'pear'],
-    skinTone: ['fair', 'medium', 'olive'],
-    style: 'boho',
-    gender: 'female',
-    budget: 'medium',
-    season: 'summer',
-    occasion: 'party'
-  }
-];
+      ]
+    }
+  ]
+};
 
 // Enable CORS for all routes
 app.use(cors({
@@ -272,20 +267,16 @@ app.post('/api/recommendations', async (req, res) => {
     // Get current fashion trends
     const currentTrends = await fetchFashionTrends();
     
-    // Filter outfits based on user preferences
-    const filteredOutfits = outfits.filter(outfit => {
-      return (
-        outfit.bodyType.includes(bodyType) &&
-        outfit.skinTone.includes(skinTone) &&
-        outfit.style === style &&
-        outfit.gender === gender &&
-        outfit.season === season &&
-        outfit.occasion === occasion
-      );
-    });
+    // Get outfits for the selected style
+    let styleOutfits = outfits[style] || [];
+    
+    // If no specific style is selected, return outfits from all styles
+    if (!style) {
+      styleOutfits = Object.values(outfits).flat();
+    }
 
     // Add current trends to each outfit
-    const recommendations = filteredOutfits.map(outfit => ({
+    const recommendations = styleOutfits.map(outfit => ({
       ...outfit,
       currentTrends
     }));
@@ -293,7 +284,10 @@ app.post('/api/recommendations', async (req, res) => {
     res.json(recommendations);
   } catch (error) {
     console.error('Error getting recommendations:', error);
-    res.status(500).json({ error: 'Failed to get recommendations' });
+    res.status(500).json({ 
+      error: 'Failed to get recommendations',
+      details: error.message 
+    });
   }
 });
 

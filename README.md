@@ -1,4 +1,4 @@
-# AI-Powered Fashion Stylist
+# AI Fashion Stylist
 
 An intelligent fashion recommendation system that provides personalized outfit suggestions based on user preferences and current fashion trends.
 
@@ -6,29 +6,41 @@ An intelligent fashion recommendation system that provides personalized outfit s
 
 - AI-powered outfit recommendations
 - Real-time fashion trends
-- Multiple shopping platform links (Amazon, H&M, Zara, Myntra, ASOS, Uniqlo)
-- Personalized suggestions based on:
-  - Body Type
-  - Skin Tone
-  - Style Preferences
-  - Gender
+- Personalized style suggestions based on:
+  - Body type
+  - Skin tone
+  - Style preferences
   - Budget
   - Season
   - Occasion
+- Shopping links for each item
+- Modern, responsive UI
+- Multiple outfit categories:
+  - Casual
+  - Formal
+  - Streetwear
+  - Boho
 
 ## Tech Stack
 
-- Frontend: React.js
-- Backend: Node.js, Express.js
-- AI Integration: Google Gemini AI
-- Styling: CSS3
+- Frontend:
+  - React
+  - React Router
+  - Axios
+  - CSS3
+
+- Backend:
+  - Node.js
+  - Express
+  - Google Gemini AI
+  - CORS
 
 ## Setup Instructions
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/fashion-stylist.git
-cd fashion-stylist
+git clone https://github.com/yourusername/ai-fashion-stylist.git
+cd ai-fashion-stylist
 ```
 
 2. Install backend dependencies:
@@ -37,51 +49,56 @@ cd server
 npm install
 ```
 
-3. Install frontend dependencies:
+3. Create a `.env` file in the server directory:
+```
+PORT=5000
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+4. Install frontend dependencies:
 ```bash
 cd ../client
 npm install
 ```
 
-4. Create a `.env` file in the server directory:
-```
-PORT=5000
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
 5. Start the backend server:
 ```bash
-cd server
+cd ../server
 node index.js
 ```
 
 6. Start the frontend development server:
 ```bash
-cd client
+cd ../client
 npm start
 ```
 
 7. Open http://localhost:3000 in your browser
 
-## Usage
+## Project Structure
 
-1. Fill out the preference form with your:
-   - Body Type
-   - Skin Tone
-   - Style
-   - Gender
-   - Budget
-   - Season
-   - Occasion
-
-2. Click "Get Recommendations" to receive:
-   - AI-powered outfit suggestions
-   - Current fashion trends
-   - Detailed outfit items with shopping links
+```
+ai-fashion-stylist/
+├── client/                 # Frontend React application
+│   ├── public/
+│   └── src/
+│       ├── components/     # React components
+│       ├── styles/         # CSS files
+│       └── App.jsx         # Main application component
+├── server/                 # Backend Node.js application
+│   ├── ai-service.js       # AI integration service
+│   └── index.js           # Main server file
+├── .gitignore
+└── README.md
+```
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
